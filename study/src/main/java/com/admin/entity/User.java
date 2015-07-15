@@ -12,41 +12,39 @@ import javax.persistence.Table;
 @Table(name = "user")
 public class User {
 
-	private int id;
+    private int    id;
 
-	private String user_name;
-	
-	private int age;
+    private String user_name;
 
-	
+    private int    age;
+
     @Id
-	@Column(name = "id")
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	public int getId() {
-		return id;
-	}
+    @Column(name = "id", unique = true, nullable = false)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    public int getId() {
+        return id;
+    }
 
-	public void setId(int id) {
-		this.id = id;
-	}
+    public void setId(int id) {
+        this.id = id;
+    }
 
-	@Column(name = "user_name")
-	public String getUser_name() {
-		return user_name;
-	}
+    @Column(name = "user_name", length = 20)
+    public String getUser_name() {
+        return user_name;
+    }
 
-	public void setUser_name(String user_name) {
-		this.user_name = user_name;
-	}
-	
-	@Column(name="age")
-	public int getAge() {
+    public void setUser_name(String user_name) {
+        this.user_name = user_name;
+    }
+
+    @Column(name = "age", length = 11)
+    public int getAge() {
         return age;
     }
 
     public void setAge(int age) {
         this.age = age;
     }
-
 
 }

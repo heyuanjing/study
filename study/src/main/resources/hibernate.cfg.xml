@@ -4,22 +4,27 @@
            "http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd">
 
 <hibernate-configuration>
-	
+
 	<session-factory>
 		<!-- H2 JDBC连接数据库的配置 -->
-		<!--
-		<property name="hibernate.connection.url">${url}</property>
-		<property name="hibernate.connection.username">${jdbc.username}</property>
-		<property name="hibernate.connection.password">${password}</property>
-		<property name="hibernate.connection.driver_class">${driverClassName}</property>
-		 -->
+		<!-- <property name="hibernate.connection.url">${url}</property> <property 
+			name="hibernate.connection.username">${jdbc.username}</property> <property 
+			name="hibernate.connection.password">${password}</property> <property name="hibernate.connection.driver_class">${driverClassName}</property> -->
 		<property name="hibernate.dialect">${hibernate.dialect}</property>
-		
-		<property name="show_sql">${hibernate.show_sql}</property>
+		<property name="show_sql">true</property>
 		<property name="format_sql">${hibernate.format_sql}</property>
 		<property name="hibernate.hbm2ddl.auto">${hibernate.hbm2ddl.auto}</property>
 		<property name="hibernate.current_session_context_class">${current_session_context_class}</property>
- 		
+		<!-- 
+		 设置二级缓存插件EHCache的Provider类 
+		<property name="hibernate.cache.provider_class">
+			org.hibernate.cache.EhCacheProvider
+		</property>
+		 启动"查询缓存" 
+		<property name="hibernate.cache.use_query_cache">
+			true
+		</property>
+		 -->
 		<mapping class="com.admin.entity.User" />
 	</session-factory>
 </hibernate-configuration>

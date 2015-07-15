@@ -6,6 +6,6 @@ import org.hibernate.tool.hbm2ddl.SchemaExport;
 public class SchemaExportTools {
 
 	public static void main(String[] args) throws Exception {
-		new SchemaExport(new Configuration().configure()).create(true, true);
+		new SchemaExport(new Configuration().configure("../../../resources/hibernate.cfg.xml")).create(true, true);
 	}
 }
