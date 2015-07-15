@@ -1,5 +1,6 @@
 package com.admin.entity;
 
+import javax.persistence.Access;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -8,16 +9,19 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
-@Table(name="user")
+@Table(name = "user")
 public class User {
 
 	private int id;
 
 	private String user_name;
+	
+	private int age;
 
-	@Id
-	@Column(name="id")
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	
+    @Id
+	@Column(name = "id")
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	public int getId() {
 		return id;
 	}
@@ -26,7 +30,7 @@ public class User {
 		this.id = id;
 	}
 
-	@Column(name="user_name")
+	@Column(name = "user_name")
 	public String getUser_name() {
 		return user_name;
 	}
@@ -35,5 +39,14 @@ public class User {
 		this.user_name = user_name;
 	}
 	
-	
+	@Column(name="age")
+	public int getAge() {
+        return age;
+    }
+
+    public void setAge(int age) {
+        this.age = age;
+    }
+
+
 }

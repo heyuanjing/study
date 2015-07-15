@@ -4,13 +4,16 @@
            "http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd">
 
 <hibernate-configuration>
+	
 	<session-factory>
 		<!-- H2 JDBC连接数据库的配置 -->
-		<property name="connection.url">${url}</property>
-		<property name="connection.username">${username}</property>
-		<property name="connection.password">${password}</property>
-		<property name="connection.driver_class">${driverClassName}</property>
-		<property name="hibernate.dialect">${dialect}</property>
+		<!-- 
+		<property name="hibernate.connection.url">${url}</property>
+		<property name="hibernate.connection.username">${username}</property>
+		<property name="hibernate.connection.password">${password}</property>
+		<property name="hibernate.connection.driver_class">${driverClassName}</property>
+		 -->
+		<property name="hibernate.dialect">org.hibernate.dialect.MySQLDialect</property>
 		
 		<property name="show_sql">${show_sql}</property>
 		<property name="format_sql">${format_sql}</property>

@@ -21,7 +21,7 @@
 	<context:component-scan base-package="com.admin.*" />
 
 	<!-- 读取外部属性文件 -->
-	<context:property-placeholder location="classpath:property.properties" />
+	<context:property-placeholder location="classpath:jdbc.properties" />
 
 	<!-- 数据库连接池 -->
 	<!-- 本地 -->
@@ -29,8 +29,20 @@
 		class="org.springframework.jdbc.datasource.DriverManagerDataSource">
 		<property name="driverClassName" value="${driverClassName}" />
 		<property name="url" value="${url}" />
-		<property name="username" value="${username}" />
+		<property name="username" value="${jdbc.username}" />
 		<property name="password" value="${password}" />
+		<!-- 配置连接池的初始值 -->
+		<!-- <property name="initialSize" value="1" /> -->
+		<!-- 连接池的最大值 -->
+		<!-- <property name="maxActive" value="500"/> -->
+		<!-- 最大空闲时，当经过一个高峰之后，连接池可以将一些用不到的连接释放，一直减少到maxIdle为止 -->
+		<!-- <property name="maxIdle" value="2"/> -->
+		<!-- 当最小空闲时，当连接少于minIdle时会自动去申请一些连接 -->
+		
+		<!-- <property name="minIdle" value="1" /> 
+		<property name="maxActive" value="100" />
+		<property name="maxIdle" value="20" />
+		<property name="maxWait" value="1000" />-->
 	</bean>
 
 	<bean id="sessionFactory"
@@ -39,16 +51,34 @@
 		<property name="dataSource" ref="dataSource" />
 	</bean>
 
-
+	 <!-- 配置Hibernate事务管理器 -->
 	<bean id="transactionManager"
 		class="org.springframework.orm.hibernate4.HibernateTransactionManager">
 		<property name="sessionFactory" ref="sessionFactory"></property>
 		<property name="dataSource" ref="dataSource" />
 	</bean>
 
-	<tx:annotation-driven transaction-manager="transactionManager" />
+	<!-- 配置事务异常封装 -->
+	<bean id="persistenceExceptionTranslationPostProcessor"
+		class="org.springframework.dao.annotation.PersistenceExceptionTranslationPostProcessor" />
 	
-	<!-- 
-	<import resource="application-javamail.xml" />
- -->
+	<!--  声明式容器事务管理 ,transaction-manager指定事务管理器为transactionManager -->
+    <tx:advice id="txAdvice" transaction-manager="transactionManager">
+        <tx:attributes>
+            <tx:method name="add*" propagation="REQUIRED" />
+            <tx:method name="get*" propagation="REQUIRED" />
+            <tx:method name="*" read-only="true" />
+        </tx:attributes>
+    </tx:advice>
+    
+    <aop:config expose-proxy="true">
+        <!-- 只对业务逻辑层实施事务 -->
+        <aop:pointcut id="txPointcut" expression="execution(* com.lei.demo.service..*.*(..))" />
+        <!-- Advisor定义，切入点和通知分别为txPointcut、txAdvice -->
+        <aop:advisor pointcut-ref="txPointcut" advice-ref="txAdvice"/>
+    </aop:config>
+
+	<tx:annotation-driven transaction-manager="transactionManager" />
+
+	<!-- <import resource="application-javamail.xml" /> -->
 </beans>

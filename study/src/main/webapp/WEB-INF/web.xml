@@ -13,7 +13,7 @@
     <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
     <init-param>
       <param-name>contextConfigLocation</param-name>
-      <param-value>classpath:spring-springmvc.xml</param-value>
+      <param-value>classpath:/spring-springmvc.xml</param-value>
     </init-param>
     <load-on-startup>1</load-on-startup>
   </servlet>
@@ -42,7 +42,7 @@
       <!-- Spring的OpenSessionInView实现 -->  
     <filter>  
         <filter-name>openSessionInViewFilter</filter-name>  
-        <filter-class>        org.springframework.orm.hibernate3.support.OpenSessionInViewFilter  
+        <filter-class>        org.springframework.orm.hibernate4.support.OpenSessionInViewFilter  
         </filter-class>  
     <!-- singleSession默认为true,若设为false则等于没用OpenSessionInView 。所以默认可以不写-->  
          <init-param>  

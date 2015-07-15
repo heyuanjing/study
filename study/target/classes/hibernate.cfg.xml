@@ -4,17 +4,20 @@
            "http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd">
 
 <hibernate-configuration>
+	
 	<session-factory>
 		<!-- H2 JDBC连接数据库的配置 -->
-		<property name="connection.url">${url}</property>
-		<property name="connection.username">${username}</property>
-		<property name="connection.password">${password}</property>
-		<property name="connection.driver_class">${driverClassName}</property>
-		<property name="hibernate.dialect">${dialect}</property>
+		<!--
+		<property name="hibernate.connection.url">${url}</property>
+		<property name="hibernate.connection.username">${jdbc.username}</property>
+		<property name="hibernate.connection.password">${password}</property>
+		<property name="hibernate.connection.driver_class">${driverClassName}</property>
+		 -->
+		<property name="hibernate.dialect">${hibernate.dialect}</property>
 		
-		<property name="show_sql">${show_sql}</property>
-		<property name="format_sql">${format_sql}</property>
-		<property name="hibernate.hbm2ddl.auto">${hbm2ddl.auto}</property>
+		<property name="show_sql">${hibernate.show_sql}</property>
+		<property name="format_sql">${hibernate.format_sql}</property>
+		<property name="hibernate.hbm2ddl.auto">${hibernate.hbm2ddl.auto}</property>
 		<property name="hibernate.current_session_context_class">${current_session_context_class}</property>
  		
 		<mapping class="com.admin.entity.User" />
