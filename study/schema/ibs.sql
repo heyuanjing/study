@@ -1,0 +1,12 @@
+CREATE DATABASE frank_test DEFAULT CHARACTER SET utf8 ;
+
+USE frank_test;
+DROP TABLE user;
+CREATE TABLE user(
+    id int NOT NULL AUTO_INCREMENT UNIQUE,
+    user_name varchar(20) NULL,
+    PRIMARY KEY (id)
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
+
+INSERT INTO User VALUES (1,'frank');
+
